@@ -14,7 +14,7 @@ int main(int argc, char const *argv[]) {
   printf("Command to launch app:\n");
   fgets(exec, 50, stdin);
 
-//Removing the /n 's  from app and exec.
+//Removing the /n 's  from app and exec strings.
   const size_t len = strlen(app);
 if (len && app[len-1] == '\n') {
     app[len-1] = '\0';
@@ -26,7 +26,7 @@ if (len2 && exec[len-1] == '\n') {
 
 
   char file_path[250];
-  strcpy(file_path,"/home/jean/Desktop/");
+  strcpy(file_path,"/home/jean/Desktop/"); // Change path to your Desktop's
   strcat(file_path, app);
   char * str=".desktop";
   strcat(file_path, str);
@@ -39,6 +39,7 @@ if (len2 && exec[len-1] == '\n') {
     return 1;
   }
 
+// Writing the launcher File
   fprintf(fp, "#!/usr/bin/env xdg-open\n\n");
   fprintf(fp, "[Desktop Entry]\n" );
   fprintf(fp, "Name=%s\n",app);
@@ -46,6 +47,7 @@ if (len2 && exec[len-1] == '\n') {
   fprintf(fp, "Terminal=false\n");
   fprintf(fp, "Type=Application\n" );
 
+// Giving permission to execute the file
   int err =chmod(file_path, 00777);
   if (err < 0)
       {
